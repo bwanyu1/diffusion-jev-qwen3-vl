@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "Diffusion-Jev: Qwen3-VL as a diffusion language model for structured decisions"
+authors:
+  - alias: bwanyu1
+repository-code: "https://github.com/bwanyu1/diffusion-jev-qwen3-vl"
+keywords:
+  - diffusion language model
+  - discrete diffusion
+  - structured output
+  - Qwen3-VL
+  - vision-language model
+  - LoRA
+license: Apache-2.0
+date-released: 2026-11-17

@@ -1,0 +1,15 @@
+# Diffusion-Jev (diffusion-jev-qwen3-vl)
+
+> Qwen3-VL-4B-Instruct converted into a discrete diffusion language model (uniform-noise diffusion, self-conditioning, LoRA) and trained to answer typed decisions — multiple choice (Choice), yes/no (Noul), graded score (Score) — by filling the blanks of a fixed JSON answer template in parallel, with a probability for every candidate. Works on text, images, ordered image sets and short videos. Includes weights, a local inference CLI and a Japanese report comparing it with an autoregressive baseline (16 questions: 0.55 s vs 1.13 s; AR more often gets all answers right; diffusion better calibrated).
+
+## Docs
+- [README](README.md): overview, setup (Git LFS, ~10 GiB weights), usage, request/response format, FAQ
+- [Report](docs/Diffusion-Jev_report.md): final diffusion-Jev vs AR results (Japanese)
+- [Methods](docs/Diffusion-Jev_methods.md): how the model was made a diffusion LM and then a decision model (Japanese)
+- [Visual](docs/Diffusion-Jev_visual_practical.md), [multi-image](docs/Diffusion-Jev_multi_image_practical.md), [video](docs/Diffusion-Jev_video_practical.md) trials with real inputs and outputs
+- [Future work](docs/Diffusion-Jev_future_work.md)
+
+## Code
+- `scripts/run_local.py`: run the final diffusion-Jev or the diffusion-only model locally
+- `djev/model.py`, `djev/sampler.py`, `djev/infill.py`: diffusion model, sampler, fill-in-the-blank decisions
+- `models/final_diffusion/`: weights (LoRA + self-conditioning FFW) and the shared Qwen3-VL backbone

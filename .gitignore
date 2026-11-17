@@ -1,0 +1,24 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+tmp/
+models/final_diffusion/backbone/model-00001-of-00002.safetensors
+models/final_diffusion/backbone/model-00002-of-00002.safetensors
+*.restoring
+
+# third-party data (COCO/A-OKVQA photos, ALOHA video): not published
+docs/multi_image_practical/images/*_photo.jpg
+docs/multi_image_practical/images/horse_crop.jpg
+docs/image_slides/
+docs/video_practical/clips/
+docs/video_practical/frames/
+docs/video_practical/source/*.mp4
+docs/video_practical/*.gif
+docs/video_practical/*_contact.png
