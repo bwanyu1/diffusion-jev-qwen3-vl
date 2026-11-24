@@ -8,6 +8,19 @@
 
 Keywords: diffusion LLM, discrete diffusion, diffusion language model, non-autoregressive decoding, parallel decoding, structured output, JSON output, constrained generation, fill-in-the-blank, multiple-choice classification, yes/no classification, calibration, vision-language model (VLM), Qwen3-VL, LoRA, self-conditioning, 拡散言語モデル, 構造化出力.
 
+## Robot demo: instruction → pick and place on an SO-101 arm
+
+![SO-101 pick and place driven by Diffusion-Jev (left: overhead phone camera, right: wrist camera, 3x speed)](docs/robot/so101_pick_place.gif)
+
+"タバコの箱をもう一つの白い台に置いて" ("put the cigarette box on the other white board"): the box is picked from one board and put on the other, **37.7 s from instruction to placed**. Both tiers run on the same weights served by one GPU (RTX 4060 Ti):
+
+- **Slow tier (instructs)** — the plain Qwen3-VL (the LoRA switched off) marks the known objects in the overhead image and turns the instruction into tasks (`pick: cigarette box` → `place: on white board 2`).
+- **Fast tier (executes)** — the diffusion Jev answers left/right of a cross drawn below the gripper on the wrist image to align over the box, then "is it between the jaws?" before closing and "is it held?" after lifting.
+
+The robot control code (LeRobot, IK, cameras) lives in a separate repository.
+
+ロボットのデモ：SO-101 のアームに日本語で指示し、タバコの箱をもう一方の台へ運ばせた実機の記録です（左：俯瞰のスマホ、右：手首カメラ、3倍速）。指示から置き終わるまで37.7秒。指示役（遅い層）は LoRA を外した素の Qwen3-VL、実行役（速い層）は拡散 Jev で、同じ重みを1枚の GPU で共有しています。
+
 ## 概要（日本語）
 
 既存の視覚言語モデル **Qwen3-VL-4B-Instruct** を**拡散言語モデル**に変換し、さらに複数の判定（選択式 Choice・はい/いいえ Noul・段階評価 Score）を**回答テンプレート（JSON）の穴埋め**として学習した実験プロジェクトです。同じ文章・画像・複数画像・動画への複数の問いに、1回の並列推論で、候補ごとの確率付きで答えます。
